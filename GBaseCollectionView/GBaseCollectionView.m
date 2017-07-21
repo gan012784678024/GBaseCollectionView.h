@@ -100,8 +100,6 @@ NSString * const ID = @"CollectionViewCell";
         _pageView.currentPage = 0;
         _pageView.pageIndicatorTintColor = [UIColor whiteColor];
         _pageView.currentPageIndicatorTintColor = [UIColor blueColor];
-        [_pageView setValue:[UIImage imageNamed:@"ic_searchbar_clear"] forKeyPath:@"pageImage"];
-        [_pageView setValue:[UIImage imageNamed:@"ic_searchbar_search"] forKeyPath:@"currentPageImage"];
     }
     return _pageView;
 }
