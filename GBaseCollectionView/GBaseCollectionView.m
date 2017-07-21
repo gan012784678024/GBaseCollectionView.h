@@ -78,8 +78,8 @@ NSString * const ID = @"CollectionViewCell";
         _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
 
         _collectionView.backgroundColor = [UIColor clearColor];
-        _collectionView.pagingEnabled = YES;
-        
+//        _collectionView.pagingEnabled = YES;
+        _collectionView.decelerationRate = 0.1;
         [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:ID];
         _collectionView.backgroundColor = [UIColor orangeColor];
         _collectionView.dataSource = self;
@@ -100,6 +100,8 @@ NSString * const ID = @"CollectionViewCell";
         _pageView.currentPage = 0;
         _pageView.pageIndicatorTintColor = [UIColor whiteColor];
         _pageView.currentPageIndicatorTintColor = [UIColor blueColor];
+        [_pageView setValue:[UIImage imageNamed:@"ic_searchbar_clear"] forKeyPath:@"pageImage"];
+        [_pageView setValue:[UIImage imageNamed:@"ic_searchbar_search"] forKeyPath:@"currentPageImage"];
     }
     return _pageView;
 }
@@ -224,6 +226,10 @@ NSString * const ID = @"CollectionViewCell";
     NSIndexPath *indexPathNow = [self.collectionView indexPathForItemAtPoint:pInView];
     // 赋值给记录当前坐标的变量
     self.currentIndexPath = indexPathNow;
+    
+    NSInteger page = self.currentIndexPath.item % self.images.count;
+    self.pageView.currentPage = page;
+    
     [_collectionView scrollToItemAtIndexPath:indexPathNow atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
 }
